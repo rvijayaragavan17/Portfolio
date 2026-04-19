@@ -482,17 +482,17 @@ function initContactForm() {
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
 
-    const nameValue    = document.getElementById('input-name').value.trim();
-    const emailValue   = document.getElementById('input-email').value.trim();
-    const subjectValue = document.getElementById('input-subject').value.trim();
-    const messageValue = document.getElementById('input-message').value.trim();
+    const nameFieldValue    = document.getElementById('input-name').value.trim();
+    const emailFieldValue   = document.getElementById('input-email').value.trim();
+    const subjectFieldValue = document.getElementById('input-subject').value.trim();
+    const messageFieldValue = document.getElementById('input-message').value.trim();
 
     // Front-end validation
-    if (!nameValue || !emailValue || !messageValue) {
+    if (!nameFieldValue || !emailFieldValue || !messageFieldValue) {
       showStatus('Please fill in all required fields.', 'error');
       return;
     }
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailValue)) {
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailFieldValue)) {
       showStatus('Please enter a valid email address.', 'error');
       return;
     }
@@ -502,10 +502,10 @@ function initContactForm() {
 
     try {
       await emailjs.send("service_b4hd76k", "02vnc4d", {
-        from_name: nameValue,
-        from_email: emailValue,
-        subject: subjectValue,
-        message: messageValue
+        from_name: nameFieldValue,
+        from_email: emailFieldValue,
+        subject: subjectFieldValue,
+        message: messageFieldValue
       }, "hWdWMmZ6Kaz1ikPWJ");
 
       showStatus('✓ Message sent! I\'ll be in touch soon.', 'success');
