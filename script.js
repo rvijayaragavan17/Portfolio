@@ -501,7 +501,7 @@ function initContactForm() {
     setLoading(true);
 
     try {
-      await emailjs.send("service_b4hd76k", "template_7gj2iil", { from_name: document.getElementById("input-name").value, from_email: document.getElementById("input-email").value, subject: document.getElementById("input-subject").value, message: document.getElementById("input-message").value });
+      await emailjs.send("service_b4hd76k", "template_7gj21il", { from_name: document.getElementById("input-name").value, from_email: document.getElementById("input-email").value, subject: document.getElementById("input-subject").value, message: document.getElementById("input-message").value });
 
       showStatus('✓ Message sent! I\'ll be in touch soon.', 'success');
       // Visual celebration
