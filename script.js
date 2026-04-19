@@ -4,8 +4,6 @@
    ================================================================ */
 'use strict';
 
-import emailjs from '@emailjs/browser';
-
 /* ══════════════════════════════════════════════════════════════
    1. LOADING SCREEN
 ══════════════════════════════════════════════════════════════ */
@@ -484,17 +482,17 @@ function initContactForm() {
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
 
-    const name    = document.getElementById('input-name').value.trim();
-    const email   = document.getElementById('input-email').value.trim();
-    const subject = document.getElementById('input-subject').value.trim();
-    const message = document.getElementById('input-message').value.trim();
+    const nameValue    = document.getElementById('input-name').value.trim();
+    const emailValue   = document.getElementById('input-email').value.trim();
+    const subjectValue = document.getElementById('input-subject').value.trim();
+    const messageValue = document.getElementById('input-message').value.trim();
 
     // Front-end validation
-    if (!name || !email || !message) {
+    if (!nameValue || !emailValue || !messageValue) {
       showStatus('Please fill in all required fields.', 'error');
       return;
     }
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailValue)) {
       showStatus('Please enter a valid email address.', 'error');
       return;
     }
@@ -503,17 +501,12 @@ function initContactForm() {
     setLoading(true);
 
     try {
-      await emailjs.send(
-        'service_b4hd76k',
-        '02vnc4d',
-        {
-          from_name: name,
-          from_email: email,
-          subject: subject,
-          message: message,
-        },
-        'hWdWMmZ6Kaz1ikPWJ'
-      );
+      await emailjs.send("service_b4hd76k", "02vnc4d", {
+        from_name: nameValue,
+        from_email: emailValue,
+        subject: subjectValue,
+        message: messageValue
+      }, "hWdWMmZ6Kaz1ikPWJ");
 
       showStatus('✓ Message sent! I\'ll be in touch soon.', 'success');
       // Visual celebration
@@ -524,8 +517,8 @@ function initContactForm() {
         btn.style.background = '';
         btn.querySelector('.btn-label').textContent = 'Send Message';
       }, 4000);
-    } catch (err) {
-      console.error(err);
+    } catch (error) {
+      console.error(error);
       showStatus('Something went wrong. Please try again.', 'error');
     } finally {
       setLoading(false);
@@ -855,6 +848,9 @@ function initQuotes() {
    DOMContentLoaded — BOOT EVERYTHING
 ══════════════════════════════════════════════════════════════ */
 document.addEventListener('DOMContentLoaded', () => {
+
+  // Initialize EmailJS
+  emailjs.init("hWdWMmZ6Kaz1ikPWJ");
 
   // Init order matters
   initLoader();
