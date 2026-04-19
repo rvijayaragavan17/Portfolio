@@ -501,7 +501,7 @@ function initContactForm() {
     setLoading(true);
 
     try {
-      await emailjs.send("service_b4hd76k", "02vnc4d", { from_name: document.getElementById("input-name").value, from_email: document.getElementById("input-email").value, subject: document.getElementById("input-subject").value, message: document.getElementById("input-message").value }, "hWdWMmZ6Kaz1ikPWJ");
+      await emailjs.send("service_b4hd76k", "02vnc4d", { from_name: document.getElementById("input-name").value, from_email: document.getElementById("input-email").value, subject: document.getElementById("input-subject").value, message: document.getElementById("input-message").value });
 
       showStatus('✓ Message sent! I\'ll be in touch soon.', 'success');
       // Visual celebration
@@ -845,7 +845,7 @@ function initQuotes() {
 document.addEventListener('DOMContentLoaded', () => {
 
   // Initialize EmailJS
-  emailjs.init("hWdWMmZ6Kaz1ikPWJ");
+  emailjs.init({ publicKey: "hWdWMmZ6Kaz1ikPWJ" });
 
   // Init order matters
   initLoader();
