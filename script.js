@@ -4,6 +4,8 @@
    ================================================================ */
 'use strict';
 
+import emailjs from '@emailjs/browser';
+
 /* ══════════════════════════════════════════════════════════════
    1. LOADING SCREEN
 ══════════════════════════════════════════════════════════════ */
@@ -501,28 +503,30 @@ function initContactForm() {
     setLoading(true);
 
     try {
-      const res = await fetch('http://localhost:3000/api/contact', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name, email, subject, message }),
-      });
+      await emailjs.send(
+        'service_b4hd76k',
+        '02vnc4d',
+        {
+          from_name: name,
+          from_email: email,
+          subject: subject,
+          message: message,
+        },
+        'hWdWMmZ6Kaz1ikPWJ'
+      );
 
-      if (res.ok) {
-        showStatus('✓ Message sent! I\'ll be in touch soon.', 'success');
-        // Visual celebration
-        btn.style.background = 'linear-gradient(135deg,#10B981,#059669)';
-        btn.querySelector('.btn-label').textContent = '✓ Sent!';
-        setTimeout(() => {
-          form.reset();
-          btn.style.background = '';
-          btn.querySelector('.btn-label').textContent = 'Send Message';
-        }, 4000);
-      } else {
-        const err = await res.json();
-        showStatus(err.error || 'Something went wrong. Please try again.', 'error');
-      }
-    } catch {
-      showStatus('Network error. Is the backend server running? (node server.js)', 'error');
+      showStatus('✓ Message sent! I\'ll be in touch soon.', 'success');
+      // Visual celebration
+      btn.style.background = 'linear-gradient(135deg,#10B981,#059669)';
+      btn.querySelector('.btn-label').textContent = '✓ Sent!';
+      setTimeout(() => {
+        form.reset();
+        btn.style.background = '';
+        btn.querySelector('.btn-label').textContent = 'Send Message';
+      }, 4000);
+    } catch (err) {
+      console.error(err);
+      showStatus('Something went wrong. Please try again.', 'error');
     } finally {
       setLoading(false);
     }

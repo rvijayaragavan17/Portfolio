@@ -954,8 +954,17 @@
   <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.29/dist/lenis.min.js"></script>
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 
+  <!-- Import Map for module resolution -->
+  <script type="importmap">
+    {
+      "imports": {
+        "@emailjs/browser": "https://cdn.jsdelivr.net/npm/@emailjs/browser@4/+esm"
+      }
+    }
+  </script>
+
   <!-- Main Script -->
-  <script src="script.js"></script>
+  <script type="module" src="script.js"></script>
 </body>
 
 </html>
